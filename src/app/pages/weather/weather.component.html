@@ -1,18 +1,18 @@
 <section class="weather-container">
   <div class="weather-header">
-    <a routerLink="/home" class="back-link">&larr; Retour a l'accueil</a>
-    <h1 class="weather-title">Meteo pour {{ city }}</h1>
+    <a routerLink="/home" class="back-link">
+      &larr; Retour à l'accueil
+    </a>
+
+    <h1 class="weather-title">Météo pour {{ city }}</h1>
   </div>
 
-  <div class="weather-content-placeholder">
-    <div class="placeholder-card">
-      <h2>Meteo actuelle</h2>
-      <p class="placeholder-text">Zone reservee a l'affichage de la meteo actuelle.</p>
+  @if (city !== '') {
+    <div class="weather-content">
+      <app-weather [city]="city" />
+      <app-forecast [city]="city" />
     </div>
-
-    <div class="placeholder-card">
-      <h2>Previsions sur 5 jours</h2>
-      <p class="placeholder-text">Zone reservee aux previsions meteo.</p>
-    </div>
-  </div>
+  } @else {
+    <p class="route-error">Aucune ville n'a été indiquée.</p>
+  }
 </section>

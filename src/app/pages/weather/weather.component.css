@@ -10,9 +10,9 @@
 
 .back-link {
   display: inline-block;
+  margin-bottom: 1rem;
   color: #0284c7;
   font-weight: 500;
-  margin-bottom: 1rem;
   transition: color 0.2s ease;
 }
 
@@ -22,33 +22,22 @@
 }
 
 .weather-title {
+  color: #0f172a;
   font-size: 2rem;
   font-weight: 700;
-  color: #0f172a;
   text-transform: capitalize;
 }
 
-.weather-content-placeholder {
-  display: grid;
-  grid-template-columns: 1fr;
+.weather-content {
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
-.placeholder-card {
-  background-color: #ffffff;
-  border: 2px dashed #cbd5e1;
-  border-radius: 8px;
+.route-error {
   padding: 2rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #b42318;
   text-align: center;
-}
-
-.placeholder-card h2 {
-  font-size: 1.25rem;
-  color: #334155;
-  margin-bottom: 0.5rem;
-}
-
-.placeholder-text {
-  color: #94a3b8;
-  font-size: 0.95rem;
 }
