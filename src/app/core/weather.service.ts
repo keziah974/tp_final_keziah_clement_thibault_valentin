@@ -1,8 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {CurrentWeather,ForecastResponse} from '../models/weather.model';
-
+import { CurrentWeather, ForecastResponse } from '../models/weather.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -22,7 +21,8 @@ export class WeatherService {
       params: {
         q: city,
         appid: environment.openWeatherApiKey,
-        units: 'metric'
+        units: 'metric',
+        lang: 'fr'
       }
     });
   }
@@ -33,35 +33,41 @@ export class WeatherService {
       params: {
         q: city,
         appid: environment.openWeatherApiKey,
-        units: 'metric'
+        units: 'metric',
+        lang: 'fr'
       }
     });
   }
 
   searchCity(city: string): void {
-    if (city === this.currentCity() && this.weatherData() !== null) {
+    const trimmedCity = city.trim();
+    if (!trimmedCity) return;
+
+    if (trimmedCity === this.currentCity() && this.weatherData() !== null) {
       return;
     }
 
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.getCurrentWeather(city).subscribe({
+    this.getCurrentWeather(trimmedCity).subscribe({
       next: (data) => {
         this.weatherData.set(data);
-        this.currentCity.set(city);
+        this.currentCity.set(trimmedCity);
         this.isLoading.set(false);
       },
-      error: (erreur) => {
-        if (erreur.status === 404) {
+      error: (error) => {
+        if (error.status === 404) {
           this.errorMessage.set('Ville introuvable.');
-        } else if (erreur.status === 429) {
+        } else if (error.status === 429) {
           this.errorMessage.set('Trop de requêtes, veuillez réessayer dans quelques instants.');
         } else {
           this.errorMessage.set('Impossible de récupérer les données météo.');
         }
+        this.weatherData.set(null);
         this.isLoading.set(false);
       }
     });
   }
 }
+

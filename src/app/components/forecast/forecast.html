@@ -19,8 +19,8 @@
           @if (forecast.weather[0]; as condition) {
             <img
               [src]="getIconUrl(condition.icon)"
-              alt="Icône des prévisions météo"
-              [attr.title]="condition.description"
+              [alt]="condition.description"
+              [title]="condition.description"
             />
 
             <p class="description">
@@ -29,7 +29,7 @@
           }
 
           <p class="temperature">
-            {{ forecast.main.temp.toFixed(0) }}°C
+            {{ forecast.main.temp | number: '1.0-0' }}°C
           </p>
 
           <p class="humidity">

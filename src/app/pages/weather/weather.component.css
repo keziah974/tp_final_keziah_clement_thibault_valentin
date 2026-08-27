@@ -1,12 +1,13 @@
-.weather-container {
+.weather-page-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-.weather-header {
+.weather-page-header {
   margin-bottom: 2rem;
 }
+
 
 .back-link {
   display: inline-block;

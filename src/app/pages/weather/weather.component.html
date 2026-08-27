@@ -1,18 +1,16 @@
-<section class="weather-container">
-  <div class="weather-header">
-    <a routerLink="/home" class="back-link">
-      &larr; Retour à l'accueil
-    </a>
-
-    <h1 class="weather-title">Météo pour {{ city }}</h1>
+<section class="weather-page-container">
+  <div class="weather-page-header">
+    <a routerLink="/home" class="back-link">&larr; Retour à l'accueil</a>
+    <app-search></app-search>
   </div>
 
   @if (city !== '') {
     <div class="weather-content">
-      <app-weather [city]="city" />
-      <app-forecast [city]="city" />
+      <app-weather [city]="city"></app-weather>
+      <app-forecast [city]="city"></app-forecast>
     </div>
   } @else {
     <p class="route-error">Aucune ville n'a été indiquée.</p>
   }
 </section>
+

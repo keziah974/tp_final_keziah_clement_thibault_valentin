@@ -1,46 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, filter } from 'rxjs';
+import { Subscription, debounceTime, filter } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './search.html',
-  styleUrls: ['./search.css']
+  styleUrl: './search.css'
 })
-export class SearchComponent implements OnInit {
-  searchForm!: FormGroup;
-  submitted = false;
+export class SearchComponent implements OnInit, OnDestroy {
+  private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  searchForm!: FormGroup;
+  submitted: boolean = false;
+  private valueChangesSub?: Subscription;
 
   ngOnInit(): void {
-    // Formulaire réactif avec champ obligatoire (au moins 2 caractères)
     this.searchForm = this.fb.group({
       city: ['', [Validators.required, Validators.minLength(2)]]
     });
 
-    // Anti-spam / Debounce : écoute les changements avec 500 ms de délai
-    this.searchForm.get('city')?.valueChanges.pipe(
-      debounceTime(2000),
-      filter(() => this.searchForm.valid)
-    ).subscribe(value => {
-      this.navigateToCity(value);
-    });
+    this.valueChangesSub = this.searchForm.get('city')?.valueChanges
+      .pipe(
+        debounceTime(1500),
+        filter(() => this.searchForm.valid)
+      )
+      .subscribe((value) => {
+        this.navigateToCity(value);
+      });
   }
 
-  // Raccourci pour accéder aux contrôles dans le template
-  get f() {
-    return this.searchForm.controls;
+  ngOnDestroy(): void {
+    this.valueChangesSub?.unsubscribe();
   }
 
-  // Soumission au clic sur "Rechercher"
+  get cityControl() {
+    return this.searchForm.get('city');
+  }
+
   onSubmit(): void {
     this.submitted = true;
 
@@ -58,3 +58,4 @@ export class SearchComponent implements OnInit {
     }
   }
 }
+

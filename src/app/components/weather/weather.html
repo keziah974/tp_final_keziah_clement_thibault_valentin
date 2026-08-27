@@ -23,10 +23,10 @@
 
         @if (weather.weather[0]; as weatherCondition) {
           <img
-			[src]="getIconUrl(weatherCondition.icon)"
-			alt="Icône de la météo actuelle"
-			[attr.title]="weatherCondition.description"
-			/>
+            [src]="getIconUrl(weatherCondition.icon)"
+            [alt]="weatherCondition.description"
+            [title]="weatherCondition.description"
+          />
         }
       </header>
 
