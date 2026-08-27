@@ -1,0 +1,46 @@
+<section class="forecast-section">
+  <h2>Prévisions sur 5 jours</h2>
+
+  @if (isLoading()) {
+    <div class="forecast-state">
+      <div class="spinner"></div>
+      <p>Chargement des prévisions...</p>
+    </div>
+  } @else if (errorMessage(); as error) {
+    <div class="forecast-state error">
+      <p>{{ error }}</p>
+    </div>
+  } @else if (forecasts().length > 0) {
+    <div class="forecast-grid">
+      @for (forecast of forecasts(); track forecast.dt) {
+        <article class="forecast-card">
+          <h3>{{ formatDay(forecast.dt) }}</h3>
+
+          @if (forecast.weather[0]; as condition) {
+            <img
+              [src]="getIconUrl(condition.icon)"
+              alt="Icône des prévisions météo"
+              [attr.title]="condition.description"
+            />
+
+            <p class="description">
+              {{ condition.description }}
+            </p>
+          }
+
+          <p class="temperature">
+            {{ forecast.main.temp.toFixed(0) }}°C
+          </p>
+
+          <p class="humidity">
+            Humidité : {{ forecast.main.humidity }} %
+          </p>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="forecast-state">
+      <p>Aucune prévision disponible.</p>
+    </div>
+  }
+</section>
