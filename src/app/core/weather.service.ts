@@ -26,6 +26,17 @@ export class WeatherService {
     });
   }
 
+  getForecast(city: string): Observable<any> {
+    const url = `${environment.openWeatherBaseUrl}/forecast`;
+    return this.http.get(url, {
+      params: {
+        q: city,
+        appid: environment.openWeatherApiKey,
+        units: 'metric'
+      }
+    });
+  }
+
   searchCity(city: string): void {
     if (city === this.currentCity() && this.weatherData() !== null) {
       return;
