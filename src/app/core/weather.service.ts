@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {CurrentWeather,ForecastResponse} from '../models/weather.model';
 
 import { environment } from '../../environments/environment';
 
@@ -11,13 +12,13 @@ export class WeatherService {
   private readonly http = inject(HttpClient);
 
   readonly currentCity = signal<string | null>(null);
-  readonly weatherData = signal<any | null>(null);
+  readonly weatherData = signal<CurrentWeather | null>(null);
   readonly isLoading = signal<boolean>(false);
   readonly errorMessage = signal<string | null>(null);
 
-  getCurrentWeather(city: string): Observable<any> {
+  getCurrentWeather(city: string): Observable<CurrentWeather> {
     const url = `${environment.openWeatherBaseUrl}/weather`;
-    return this.http.get(url, {
+    return this.http.get<CurrentWeather>(url, {
       params: {
         q: city,
         appid: environment.openWeatherApiKey,
@@ -26,9 +27,9 @@ export class WeatherService {
     });
   }
 
-  getForecast(city: string): Observable<any> {
+  getForecast(city: string): Observable<ForecastResponse> {
     const url = `${environment.openWeatherBaseUrl}/forecast`;
-    return this.http.get(url, {
+    return this.http.get<ForecastResponse>(url, {
       params: {
         q: city,
         appid: environment.openWeatherApiKey,

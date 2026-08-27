@@ -1,0 +1,69 @@
+<section class="weather-container">
+  @if (weatherService.isLoading()) {
+    <div class="state-card loading">
+      <div class="spinner"></div>
+      <p>Chargement de la météo...</p>
+    </div>
+  } @else if (weatherService.errorMessage(); as errorMessage) {
+    <div class="state-card error">
+      <span class="state-icon">!</span>
+      <p>{{ errorMessage }}</p>
+    </div>
+  } @else if (weatherService.weatherData(); as weather) {
+    <article class="weather-card">
+      <header class="weather-header">
+        <div>
+          <p class="location-label">Météo actuelle</p>
+
+          <h1>
+            {{ weather.name }}
+            <span>{{ weather.sys.country }}</span>
+          </h1>
+        </div>
+
+        @if (weather.weather[0]; as weatherCondition) {
+          <img
+			[src]="getIconUrl(weatherCondition.icon)"
+			alt="Icône de la météo actuelle"
+			[attr.title]="weatherCondition.description"
+			/>
+        }
+      </header>
+
+      <div class="temperature">
+        {{ weather.main.temp | number: '1.0-0' }}°C
+      </div>
+
+      @if (weather.weather[0]; as weatherCondition) {
+        <p class="description">
+          {{ weatherCondition.description }}
+        </p>
+      }
+
+      <div class="weather-details">
+        <div class="detail">
+          <span class="detail-label">Ressenti</span>
+          <strong>
+            {{ weather.main.feels_like | number: '1.0-0' }}°C
+          </strong>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Humidité</span>
+          <strong>{{ weather.main.humidity }} %</strong>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Vent</span>
+          <strong>
+            {{ weather.wind.speed * 3.6 | number: '1.0-0' }} km/h
+          </strong>
+        </div>
+      </div>
+    </article>
+  } @else {
+    <div class="state-card empty">
+      <p>Recherchez une ville pour afficher sa météo.</p>
+    </div>
+  }
+</section>
