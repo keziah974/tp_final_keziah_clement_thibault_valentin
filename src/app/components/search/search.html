@@ -1,0 +1,21 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+  <div class="form-group">
+    <label for="city-input">Rechercher une ville</label>
+    <div class="input-wrapper">
+      <input
+        id="city-input"
+        type="text"
+        formControlName="city"
+        placeholder="Paris, Tokyo, Lille..."
+        [ngClass]="{ 'is-invalid': submitted && f['city'].errors }"
+      />
+      <button type="submit">Rechercher</button>
+    </div>
+    
+    <!-- Message d'erreur conforme au cahier des charges -->
+    <div *ngIf="submitted && f['city'].errors" class="error-message">
+      <span *ngIf="f['city'].errors['required']">Veuillez saisir une ville.</span>
+      <span *ngIf="f['city'].errors['minlength']">Le nom de la ville est trop court.</span>
+    </div>
+  </div>
+</form>

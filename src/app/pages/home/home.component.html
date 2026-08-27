@@ -4,9 +4,12 @@
     <p class="home-subtitle">Consultez la météo en temps réel et les prévisions pour votre ville.</p>
   </div>
 
-  <div class="search-section-placeholder">
-    <div class="placeholder-card">
-      <p class="placeholder-text">Zone réservée au formulaire de recherche de ville.</p>
-    </div>
+<app-search></app-search>
+
+ <!-- État vide avant la première recherche -->
+  <div class="empty-state">
+    <div class="icon-placeholder">☁️☀️</div>
+    <h3>Aucune recherche pour l'instant</h3>
+    <p>Saisissez le nom d'une ville ci-dessus pour afficher sa météo en direct.</p>
   </div>
 </section>
