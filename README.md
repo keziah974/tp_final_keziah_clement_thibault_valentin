@@ -1,95 +1,121 @@
-# MeteoVCTK
+# Weather App - Application Meteo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.21.
+Projet de groupe realise dans le cadre du cursus de developpement web a l'IPSSI.
 
-## Development server
+## Presentation
 
-To start a local development server, run:
+Weather App est une application web developpee avec Angular permettant aux utilisateurs de rechercher une ville et de consulter en temps reel les donnees meteorologiques actuelles ainsi que les previsions detaillees sur 5 jours grace a l'API OpenWeather.
+
+## Membres de l'equipe et repartition des taches
+
+- Keziah (Membre 1) : Setup du projet, structure des dossiers, configuration du routing (/home, /weather/:city, /about), Navbar globale, page A propos statique, squelette du README et preparation des composants pour l'equipe.
+- Clement (Membre 2) : Formulaire de recherche avec validation reactive, autocompletion et redirection vers la page meteo.
+- Valentin (Membre 3) : Service API OpenWeather, requetes HTTP avec RxJS, typage TypeScript et gestion globale des erreurs.
+- Thibault (Membre 4) : Affichage des conditions meteo actuelles et grille des previsions detaillees sur 5 jours.
+
+## Technologies utilisees
+
+- Angular (v21 - Standalone Components, Signals, Router, HttpClient)
+- TypeScript
+- HTML5 / CSS3
+- RxJS
+- OpenWeather API (Current Weather Data et 5 Day / 3 Hour Forecast)
+
+## Installation et lancement
+
+### Pre-requis
+
+- Node.js (version 18 ou superieure recommandee)
+- NPM
+- Angular CLI
+
+### Installation des dependances
+
+```bash
+npm install
+```
+
+### Lancement du serveur de developpement
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+L'application sera accessible a l'adresse : `http://localhost:4200/`
 
-## Code scaffolding
+## Configuration de la cle API OpenWeather
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Pour recuperer les donnees meteorologiques, une cle API OpenWeather est necessaire :
 
-```bash
-ng generate component component-name
+1. Creer un compte sur https://openweathermap.org/
+2. Generer une cle API dans la section API keys de votre compte.
+3. Configurer la cle dans les fichiers d'environnement (`src/environments/environment.ts`) ou dans le service dedie :
+
+```typescript
+export const environment = {
+  production: false,
+  openWeatherApiKey: 'VOTRE_CLE_API_ICI',
+  openWeatherApiUrl: 'https://api.openweathermap.org/data/2.5'
+};
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Fonctionnalites
 
-```bash
-ng generate --help
+- Navigation fluide via le Router Angular (/home, /weather/:city, /about).
+- Recherche de ville avec barre de recherche reactive (en cours de developpement par Clement).
+- Recuperation asynchrone des donnees meteo via HttpClient (en cours de developpement par Valentin).
+- Affichage de la meteo actuelle (temperature, ressenti, humidite, vent, icones) (en cours de developpement par Thibault).
+- Previsions meteo detaillees sur 5 jours (en cours de developpement par Thibault).
+- Page A propos presentant le projet, les technologies et les contributeurs.
+
+## Architecture du projet
+
+```text
+src/
+├── app/
+│   ├── components/
+│   │   └── navbar/
+│   │       ├── navbar.component.ts
+│   │       ├── navbar.component.html
+│   │       └── navbar.component.css
+│   ├── pages/
+│   │   ├── home/
+│   │   │   ├── home.component.ts
+│   │   │   ├── home.component.html
+│   │   │   └── home.component.css
+│   │   ├── weather/
+│   │   │   ├── weather.component.ts
+│   │   │   ├── weather.component.html
+│   │   │   └── weather.component.css
+│   │   └── about/
+│   │       ├── about.component.ts
+│   │       ├── about.component.html
+│   │       └── about.component.css
+│   ├── services/
+│   ├── models/
+│   ├── app.config.ts
+│   ├── app.routes.ts
+│   ├── app.ts
+│   ├── app.html
+│   └── app.css
+├── styles.css
+└── main.ts
 ```
 
-## Building
+## API OpenWeather
 
-To build the project run:
+L'application exploite deux endpoints de l'API OpenWeather :
+- Current Weather Data : `GET https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&lang=fr&appid={API_KEY}`
+- 5 Day Forecast : `GET https://api.openweathermap.org/data/2.5/forecast?q={city}&units=metric&lang=fr&appid={API_KEY}`
 
-```bash
-ng build
-```
+## Tests et collection Postman
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+La collection Postman pour tester les endpoints de l'API OpenWeather ainsi que les requetes de l'application sera disponible dans le dossier `postman/`.
 
-## Running unit tests
+## Difficultes rencontrees
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Section a completer par l'equipe au fur et a mesure du developpement.
 
-```bash
-ng test
-```
+## Ameliorations futures
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Weather Service & API (OpenWeather)
-
-### Configuration de la clé API
-
-L'application utilise l'API OpenWeather via `WeatherService` (`src/app/core/weather.service.ts`). La clé API n'est jamais commitée dans le dépôt.
-
-Pour configurer ta propre clé :
-
-1. Copie `src/environments/environment.example.ts` vers `src/environments/environment.ts` (et `environment.prod.ts` si besoin).
-2. Récupère une clé gratuite sur [openweathermap.org](https://openweathermap.org/api).
-3. Remplace `YOUR_API_KEY_HERE` par ta clé dans `openWeatherApiKey`.
-
-Ces fichiers (`environment.ts`, `environment.prod.ts`) sont listés dans `.gitignore` : ils ne doivent jamais être poussés sur le dépôt commun.
-
-### Endpoints utilisés
-
-| Endpoint | Méthode | Paramètres | Usage |
-|---|---|---|---|
-| `/data/2.5/weather` | GET | `q` (ville), `appid` (clé API), `units=metric` | Météo actuelle d'une ville |
-| `/data/2.5/forecast` | GET | `q` (ville), `appid` (clé API), `units=metric` | Prévisions à 5 jours (par tranches de 3h) |
-
-Base URL : `https://api.openweathermap.org/data/2.5`
-
-### Collection Postman
-
-Une collection Postman est disponible dans `postman/WeatherApp.postman_collection.json`.
-
-Pour l'utiliser :
-
-1. Dans Postman, `Import` puis sélectionner ce fichier.
-2. Renseigner les variables de la collection :
-   - `base_url` : déjà pré-remplie avec l'URL de l'API OpenWeather
-   - `api_key` : ta clé API personnelle
-   - `city` : ville à tester (ex. `Paris`)
-3. Lancer les requêtes `Current Weather` et `Forecast`.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Section a completer par l'equipe (geolocalisation de l'utilisateur, mise en favoris des villes, passage Celsius/Fahrenheit, mode sombre, graphiques d'evolution des temperatures).
