@@ -24,13 +24,14 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{base_url}}/weather?q={{city}}&appid={{api_key}}&units=metric",
+          "raw": "{{base_url}}/weather?q={{city}}&appid={{api_key}}&units=metric&lang=fr",
           "host": ["{{base_url}}"],
           "path": ["weather"],
           "query": [
             { "key": "q", "value": "{{city}}" },
             { "key": "appid", "value": "{{api_key}}" },
-            { "key": "units", "value": "metric" }
+            { "key": "units", "value": "metric" },
+            { "key": "lang", "value": "fr" }
           ]
         },
         "description": "Récupère la météo actuelle d'une ville (température, description, humidité, etc.)."
@@ -41,13 +42,14 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{base_url}}/forecast?q={{city}}&appid={{api_key}}&units=metric",
+          "raw": "{{base_url}}/forecast?q={{city}}&appid={{api_key}}&units=metric&lang=fr",
           "host": ["{{base_url}}"],
           "path": ["forecast"],
           "query": [
             { "key": "q", "value": "{{city}}" },
             { "key": "appid", "value": "{{api_key}}" },
-            { "key": "units", "value": "metric" }
+            { "key": "units", "value": "metric" },
+            { "key": "lang", "value": "fr" }
           ]
         },
         "description": "Récupère les prévisions météo sur 5 jours (par tranches de 3h) pour une ville."
