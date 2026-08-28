@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, Input, OnChanges, inject } from '@angular/core';
-import { WeatherService } from '../../core/weather.service';
+import { WeatherService } from '../../services/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -25,4 +25,4 @@ export class Weather implements OnChanges {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   }
 }
-
+

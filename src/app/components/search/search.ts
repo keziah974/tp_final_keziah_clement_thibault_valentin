@@ -44,11 +44,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.submitted = true;
 
-    if (this.searchForm.invalid) {
+    const trimmedCity = this.searchForm.value.city?.trim() ?? '';
+    if (this.searchForm.invalid || !trimmedCity) {
       return;
     }
 
-    this.navigateToCity(this.searchForm.value.city);
+    this.navigateToCity(trimmedCity);
   }
 
   private navigateToCity(city: string): void {

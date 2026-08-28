@@ -2,7 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, inject, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WeatherService } from '../../core/weather.service';
+import { WeatherService } from '../../services/weather.service';
 import { ForecastItem } from '../../models/weather.model';
 
 @Component({
@@ -64,11 +64,11 @@ export class Forecast implements OnChanges, OnDestroy {
       },
       error: (error: HttpErrorResponse) => {
         if (error.status === 404) {
-          this.errorMessage.set('Prévisions introuvables pour cette ville.');
+          this.errorMessage.set('Ville introuvable.');
         } else if (error.status === 429) {
           this.errorMessage.set('Trop de requêtes, veuillez réessayer dans quelques instants.');
         } else {
-          this.errorMessage.set('Impossible de récupérer les prévisions météo.');
+          this.errorMessage.set('Impossible de récupérer les données météo.');
         }
         this.isLoading.set(false);
       }

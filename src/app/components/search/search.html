@@ -12,13 +12,9 @@
       <button type="submit">Rechercher</button>
     </div>
 
-    @if (submitted && cityControl?.invalid) {
+    @if (submitted && (cityControl?.invalid || !cityControl?.value?.trim())) {
       <div class="error-message">
-        @if (cityControl?.hasError('required')) {
-          <span>Veuillez saisir une ville.</span>
-        } @else if (cityControl?.hasError('minlength')) {
-          <span>Le nom de la ville est trop court.</span>
-        }
+        <span>Veuillez saisir une ville.</span>
       </div>
     }
   </div>
