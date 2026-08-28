@@ -6,12 +6,12 @@ Projet de groupe realise dans le cadre du cursus de developpement web a l'IPSSI.
 
 Weather App est une application web developpee avec Angular permettant aux utilisateurs de rechercher une ville et de consulter en temps reel les donnees meteorologiques actuelles ainsi que les previsions detaillees sur 5 jours grace a l'API OpenWeather.
 
-## Membres de l'equipe et repartition des taches
+## Membres de l'équipe et répartition des tâches
 
-- Keziah (Membre 1) : Setup du projet, structure des dossiers, configuration du routing (/home, /weather/:city, /about), Navbar globale, page A propos statique, squelette du README et preparation des composants pour l'equipe.
-- Clement (Membre 2) : Formulaire de recherche avec validation reactive, autocompletion et redirection vers la page meteo.
-- Valentin (Membre 3) : Service API OpenWeather, requetes HTTP avec RxJS, typage TypeScript et gestion globale des erreurs.
-- Thibault (Membre 4) : Affichage des conditions meteo actuelles et grille des previsions detaillees sur 5 jours.
+- **Keziah (Membre 1 — Structure & Routing)** : Setup du projet Angular, structure des dossiers, configuration du routing (`/home`, `/weather/:city`, `/about`), Navbar globale, page À propos statique et squelette du README.
+- **Clément (Membre 2 — Formulaire & Page Home)** : Composant Search (Reactive Forms), validation du champ obligatoire avec message d'erreur, page Home avec redirection vers `/weather/:city` au submit, debounce / anti-spam sur la recherche.
+- **Valentin (Membre 3 — Service & API)** : `weather.service.ts` (HttpClient, endpoint OpenWeather, clé API dans `environment.ts`), gestion de l'état (signals / RxJS) pour ville, données, loading et erreur, gestion globale des erreurs (404, 401, 429, générique) et collection Postman.
+- **Thibault (Membre 4 — Affichage météo & Fonctionnalité libre)** : Composant Weather (affichage du résultat, conversion Celsius, icônes météo), gestion des états loading / vide / erreur dans le template, fonctionnalité libre (prévisions sur 5 jours) avec son propre appel service.
 
 ## Technologies utilisees
 

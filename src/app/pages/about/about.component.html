@@ -33,30 +33,49 @@
   </article>
 
   <article class="about-section">
-    <h2 class="section-title">Membres du groupe et repartition</h2>
+    <h2 class="section-title">Membres du groupe et répartition</h2>
     <div class="members-grid">
       <div class="member-card">
-        <h3 class="member-name">Keziah (Membre 1)</h3>
-        <p class="member-role">Structure et Routing</p>
-        <p class="member-desc">Setup du projet, arborescence des dossiers, configuration du routing, navbar globale, page A propos et squelette du README.</p>
+        <h3 class="member-name">Keziah — Membre 1</h3>
+        <p class="member-role">Structure & Routing</p>
+        <ul class="member-tasks">
+          <li>Setup projet Angular, structure des dossiers</li>
+          <li>Routing (/home, /weather/:city, /about)</li>
+          <li>Navbar + page About</li>
+          <li>README (squelette à compléter au fil du projet)</li>
+        </ul>
       </div>
 
       <div class="member-card">
-        <h3 class="member-name">Clement (Membre 2)</h3>
-        <p class="member-role">Formulaire et Page d'accueil</p>
-        <p class="member-desc">Formulaire de recherche avec validation reactive, autocompletion et redirection vers la page meteo.</p>
+        <h3 class="member-name">Clément — Membre 2</h3>
+        <p class="member-role">Formulaire & Page Home</p>
+        <ul class="member-tasks">
+          <li>Composant Search (Reactive Forms)</li>
+          <li>Validation champ obligatoire + message d'erreur</li>
+          <li>Page Home + navigation vers /weather/:city au submit</li>
+          <li>Debounce / anti-spam sur la recherche</li>
+        </ul>
       </div>
 
       <div class="member-card">
-        <h3 class="member-name">Valentin (Membre 3)</h3>
-        <p class="member-role">Service API et Gestion d'etat</p>
-        <p class="member-desc">Service OpenWeather, requetes HTTP, gestion des observables, typage des interfaces et gestion globale des erreurs.</p>
+        <h3 class="member-name">Valentin — Membre 3</h3>
+        <p class="member-role">Service & API</p>
+        <ul class="member-tasks">
+          <li>weather.service.ts (HttpClient, endpoint OpenWeather, clé API dans environment.ts)</li>
+          <li>Gestion état (signals / RxJS) : ville, données, loading, erreur</li>
+          <li>Gestion des erreurs (ville introuvable, 401, 429, erreur générique)</li>
+          <li>Collection Postman</li>
+        </ul>
       </div>
 
       <div class="member-card">
-        <h3 class="member-name">Thibault (Membre 4)</h3>
-        <p class="member-role">Affichage meteo et Previsions</p>
-        <p class="member-desc">Composants d'affichage des conditions meteorologiques actuelles et grille des previsions detaillees sur 5 jours.</p>
+        <h3 class="member-name">Thibault — Membre 4</h3>
+        <p class="member-role">Affichage météo & Fonctionnalité libre</p>
+        <ul class="member-tasks">
+          <li>Composant Weather (affichage résultat, conversion Kelvin/Celsius, icône)</li>
+          <li>États loading / vide / erreur dans le template</li>
+          <li>Fonctionnalité libre (prévisions sur 5 jours) avec son propre appel service</li>
+        </ul>
       </div>
     </div>
   </article>
